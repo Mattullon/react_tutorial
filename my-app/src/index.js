@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./index.html";
+import "./index.jsx";
+//import "./index.html";
 // eslint-disable-next-line no-unused-vars
-var c = 0; // es el contador para cuando termina el juego se muestre el historial
+var c = 0  // es el contador para cuando termina el juego se muestre el historial
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -11,6 +12,9 @@ function Square(props) {
     </button>
   );
 }
+
+
+
 
 class Board extends React.Component {
   renderSquare(i) {
@@ -133,7 +137,16 @@ class Game extends React.Component {
     let c = 0;
     const moves = history.map((step, move) => {
       const deshacer = move ? "IR A LA JUGADA : #" + move : "IR AL INICIO";
+      const esconder = ()=> {
+        //const c = react.usestate 
 
+      }
+     /* (c)=>{
+      if (c=0){
+        this.
+      }}*/
+      
+      
       //console.log('move: ', move);
       return (
         <li key={move}>
@@ -157,13 +170,16 @@ class Game extends React.Component {
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
           />
-
+          
           <button onClick={() => this.vaciar()}>{"REINICIAR"}</button>
           <button onClick={() => this.deshacer()}>{"DESHACER"}</button>
+          
           <br></br>
+         <div className="btn" esconder={()=> this.hide(true)}>
           <button onClick={() => this.deshacer()}>{"<=="}</button>
 
           <button onClick={() => this.flecha_derecha()}>{"==>"}</button>
+          </div>
           <br></br>
         </div>
         <div className="game-info">
@@ -208,3 +224,6 @@ function calculateWinner(squares) {
 // cuando apretes la flecha para atras resaltar el ultimo movimiento
 // cuando termine el juego ahi recien mostrar el historial o agregarle un boton para mostrar
 // subir a un servidor netlify
+//shorhans ? : 
+// ver como funciona un objeto, para guardar posicion en el tablero 
+// como importar funiciones y hacer otra carpeta  
