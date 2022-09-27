@@ -1,6 +1,8 @@
 body {
     font: 20px "Century Gothic", Futura, sans-serif;
     margin: 20px;
+    background-color: rgb(12, 15, 12);
+    margin: center;
   }
   
   ol, ul {
@@ -15,12 +17,14 @@ body {
   
   .status {
     margin-bottom: 20px;
+    margin: flex;
   }
   
   .square {
-    background: #fff;
-    border: 1px solid #999;
+    background: rgb(94, 42, 42);
+    border: 1px solid rgb(26, 22, 22);
     float: left;
+    color: white;
     font-size: 24px;
     font-weight: bold;
     line-height: 50px;
@@ -34,18 +38,25 @@ body {
   
   .square:focus {
     outline: none;
+    color: aliceblue;
   }
   
   .kbd-navigation .square:focus {
-    background: #ddd;
+    background: rgb(196, 48, 48);
   }
   
   .game {
     display: flex;
     flex-direction: row;
+    
   }
   
-  .game-info {
-    margin-left: 35px;
+  .nif {
+    margin-left: 60px;
+    color:whitesmoke;
+    margin: center;
   }
-  
+  .flechas{
+    margin-left: 60px;
+
+  }
