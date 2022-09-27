@@ -36,6 +36,12 @@ class Game extends React.Component {
       });
     
     } 
+    if(this.state.stepNumber === 9 ){
+      this.setState({
+        showHistory: true,
+      });
+
+    }
   
   this.setState({
       history: history.concat([
