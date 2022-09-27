@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./index.jsx";
-//import "./index.html";
-// eslint-disable-next-line no-unused-vars
-var c = 0  // es el contador para cuando termina el juego se muestre el historial
+
+
+
 function Square(props) {
   return (
     <button className="square" onClick={props.onClick}>
@@ -60,6 +59,7 @@ class Game extends React.Component {
       ],
       stepNumber: 0,
       xIsNext: true,
+      showHistory: false,
     };
   }
 
@@ -67,15 +67,17 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    
 
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    if ((c = 1)) {
-      <div>
-        <button> hola que tal </button>
-      </div>;
-    }
+    
+    if (calculateWinner(squares) && this.state.showHistory=== false ){
+      this.setState({
+        showHistory: true
+      });
+    } 
     squares[i] = this.state.xIsNext ? "X" : "O";
 
     this.setState({
@@ -88,6 +90,7 @@ class Game extends React.Component {
       xIsNext: !this.state.xIsNext,
     });
   }
+  
 
   jumpTo(step) {
     this.setState({
@@ -185,7 +188,7 @@ class Game extends React.Component {
         <div className="game-info">
           <p>HISTORIAL</p>
           <div>{status}</div>
-          <ol>{moves}</ol>
+         {this.state.showHistory & <ol>{moves}</ol>} 
         </div>
       </div>
     );
