@@ -152,7 +152,7 @@ class Game extends React.Component {
         {this.state.showHistory && (
           <h2 className="flechas">
             {" "}
-            <button onClick={() => this.fecha_derecha()}>{"<=="}</button>
+            <button onClick={() => this.deshacer()}>{"<=="}</button>
             <button onClick={() => this.flecha_derecha()}>{"==>"}</button>
           </h2>
         )}
