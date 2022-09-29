@@ -14,8 +14,8 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       showHistory: false,
-      showArrow:false,
-      showArrowR:false,
+      showArrow: false,
+      showArrowR: false,
     };
   }
 
@@ -23,27 +23,19 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
-
+    
+    
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-
     squares[i] = this.state.xIsNext ? "X" : "O";
-
+    
+    
+    //pregunta si hay un ganador y si showHistory = falso
     if (calculateWinner(squares) && this.state.showHistory === false) {
       this.setState({
         showHistory: true,
-        showArrowR:true,
-      });
-    }
-    if (this.state.stepNumber === 9) {
-      this.setState({
-        showHistory: true,
-      });
-    }
-    if (this.state.stepNumber === 0) {
-      this.setState({
-        showArrowR: false,
+        showArrowR: true,
       });
     }
 
@@ -115,7 +107,6 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     const moves = history.map((step, move) => {
-     
       return (
         <li key={move}>
           jugada numero #{move}
@@ -142,7 +133,7 @@ class Game extends React.Component {
           <button onClick={() => this.deshacer()}>{"DESHACER"}</button>
 
           <br></br>
-
+          <h6 className="h"> hola </h6>
           <br></br>
         </div>
         <div className="nif">
@@ -154,13 +145,12 @@ class Game extends React.Component {
 
         {this.state.showHistory && (
           <h2 className="flechas">
-            
             <button onClick={() => this.flecha_iz()}>{"<=="}</button>
-            { this.state.showArrow && ( <button onClick={() => this.flecha_derecha()}>{"==>"}</button>
+            {this.state.showArrow && (
+              <button onClick={() => this.flecha_derecha()}>{"==>"}</button>
             )}
           </h2>
         )}
-        
       </div>
     );
   }
