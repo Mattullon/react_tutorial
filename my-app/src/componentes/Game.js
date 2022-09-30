@@ -2,6 +2,7 @@ import React from "react";
 import { calculateWinner } from "../calculador";
 import Board from "./Board";
 
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -24,6 +25,11 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     
+    // if (squares() === null ){
+
+    //   console.log("hola")
+
+    // }
     
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -43,6 +49,7 @@ class Game extends React.Component {
       history: history.concat([
         {
           squares: squares,
+          x:i,
         },
       ]),
       stepNumber: history.length,
@@ -108,7 +115,7 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
     const moves = history.map((step, move) => {
       return (
-        <li key={move}>
+        <li className="col" key={move}>
           jugada numero #{move}
           <button onClick={() => this.jumpTo(move)}>{"ver jugada"}</button>
         </li>
