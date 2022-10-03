@@ -3,6 +3,7 @@ import { calculateWinner } from "../calculador";
 import Board from "./Board";
 
 
+
 class Game extends React.Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,7 @@ class Game extends React.Component {
       history: [
         {
           squares: Array(9).fill(null),
+          positionClicked:null,
         },
       ],
       stepNumber: 0,
@@ -17,6 +19,12 @@ class Game extends React.Component {
       showHistory: false,
       showArrow: false,
       showArrowR: false,
+      selectedSquare:null,
+      stopState:false,
+      selectedStep:null,
+      contador:null,
+      
+      
     };
   }
 
@@ -25,11 +33,16 @@ class Game extends React.Component {
     const current = history[history.length - 1];
     const squares = current.squares.slice();
     
-    // if (squares() === null ){
-
-    //   console.log("hola")
-
-    // }
+    
+    if(this.state.showHistory === true){
+      
+      this.setState({
+      selectedSquare:i,
+      stepNumber: this.state.contador
+    });}
+    
+    
+    
     
     if (calculateWinner(squares) || squares[i]) {
       return;
@@ -43,25 +56,49 @@ class Game extends React.Component {
         showHistory: true,
         showArrowR: true,
       });
-    }
-
+    } 
+  
+    
     this.setState({
       history: history.concat([
         {
           squares: squares,
-          x:i,
+           positionClicked:i,
         },
       ]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     });
-  }
+    
+    
+   
+    
+    // pregunta si el array history es igual a 9, y si el estado de mostrar historia es falso 
+    if (history.length === 9 && this.state.showHistory === false){
 
-  jumpTo(step) {
+      this.setState({
+        showHistory:true,
+        showArrow:false,
+      });
+
+    }
+    if (history.length === 1 && this.state.showHistory === true){
+
+      this.setState({
+        
+        showArrowR:false,
+      });
+    }
+  }
+  
+   
+  jumpto(move, step) {
     this.setState({
+      selectedSquare:move.positionClicked,
       stepNumber: step,
-      xIsNext: step % 2 === 0,
-    });
+      contador: step,
+    })
+    
   }
 
   deshacer() {
@@ -76,6 +113,8 @@ class Game extends React.Component {
     this.setState({
       stepNumber: unDoStep,
       showHistory: false,
+      selectedSquare:null,
+      selectedStep:null,
     });
   }
   flecha_iz() {
@@ -101,9 +140,12 @@ class Game extends React.Component {
       stepNumber: 0,
       xIsNext: true,
       showHistory: false,
+      selectedSquare:null,
+      selectedStep:null,
       history: [
         {
           squares: Array(9).fill(null),
+          positionClicked:null,
         },
       ],
     });
@@ -113,16 +155,20 @@ class Game extends React.Component {
     const history = this.state.history;
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
-    const moves = history.map((step, move) => {
+    
+    const moves = history.map((step,move) => {
+    const chance= this.state.selectedStep ? "col col-select": "col";
+    
       return (
-        <li className="col" key={move}>
-          jugada numero #{move}
-          <button onClick={() => this.jumpTo(move)}>{"ver jugada"}</button>
+        <li className={chance} key={move}>
+           jugada numero #{move}
+          <button onClick={() => this.jumpto(step,move) }>{"ver jugada"}</button>
         </li>
       );
+    
     });
     let status;
-
+    
     if (winner) {
       status = "EL GANADOR ES: " + winner;
     } else {
@@ -134,6 +180,9 @@ class Game extends React.Component {
           <Board
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
+            selectedSquare={this.state.selectedSquare}
+            selectedStep={this.state.selectedStep}
+            
           />
 
           <button onClick={() => this.vaciar()}>{"REINICIAR"}</button>
@@ -147,10 +196,11 @@ class Game extends React.Component {
           <p>HISTORIAL</p>
           <div>{status}</div>
           {this.state.showHistory && <ol>{moves}</ol>}
+          <p1 className="f"> El numero de la jugada seleccionada es el {this.state.stepNumber} </p1>
         </div>
         <br></br>
 
-        {this.state.showHistory && (
+        {this.state.showArrowR && (
           <h2 className="flechas">
             <button onClick={() => this.flecha_iz()}>{"<=="}</button>
             {this.state.showArrow && (

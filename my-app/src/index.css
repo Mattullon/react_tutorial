@@ -25,12 +25,16 @@ body {
   .col{
     color: red;
   }
+
+  .col-select{
+    color: green;
+  }
   
   .square {
     background: rgb(94, 42, 42);
     border: 1px solid rgb(26, 22, 22);
     float: left;
-    color: white;
+    color: rgb(203, 0, 0);
     font-size: 24px;
     font-weight: bold;
     line-height: 50px;
@@ -41,8 +45,12 @@ body {
     text-align: center;
     width: 50px;
   }
+
+  .f{
+    color:blueviolet
+  }
   
-  .square:focus {
+  .square-select {
     outline: none;
     color: aliceblue;
   }

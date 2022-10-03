@@ -1,9 +1,17 @@
 
  export function Square(props) {
+
+   const clase = props.selected ? "square square-select": "square"
     return (
-      <button className="square" onClick={props.onClick}>
-        {props.value}
+      
+
+
+    
+      <button className={clase} onClick={props.onClick}>
+        {props.value}{props.selected}
       </button>
+      
+    
+
     );
   }
-  

@@ -8,6 +8,8 @@ import {Square} from "./Square"
         <Square
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
+          selected={this.props.selectedSquare === i} 
+          selectedSted={this.props.value}
         />
       );
     }
