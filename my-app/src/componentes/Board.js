@@ -1,15 +1,18 @@
 import React from 'react';
 import {Square} from "./Square"
 
-
+let contad=1
  class Board extends React.Component {
+  
     renderSquare(i) {
       return (
         <Square
+        
           value={this.props.squares[i]}
           onClick={() => this.props.onClick(i)}
           selected={this.props.selectedSquare === i} 
-          selectedSted={this.props.value}
+          selectedSted= {i+contad}
+
         />
       );
     }

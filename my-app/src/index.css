@@ -49,7 +49,9 @@ body {
   .f{
     color:blueviolet
   }
-  
+  .hola{
+    color: blue;
+  }
   .square-select {
     outline: none;
     color: aliceblue;

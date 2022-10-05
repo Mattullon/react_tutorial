@@ -37,9 +37,12 @@ class Game extends React.Component {
     if(this.state.showHistory === true){
       
       this.setState({
-      selectedSquare:i,
-      stepNumber: this.state.contador
-    });}
+      
+        selectedSquare:i,
+      
+        });
+    }
+    
     
     
     
@@ -57,13 +60,15 @@ class Game extends React.Component {
         showArrowR: true,
       });
     } 
-  
+    
+    
     
     this.setState({
       history: history.concat([
         {
           squares: squares,
            positionClicked:i,
+        
         },
       ]),
       stepNumber: history.length,
@@ -100,8 +105,8 @@ class Game extends React.Component {
     })
     
   }
-
-  deshacer() {
+    
+    deshacer() {
     const step = this.state.stepNumber;
     const unDoStep = step ? step - 1 : 0;
 
@@ -141,7 +146,7 @@ class Game extends React.Component {
       xIsNext: true,
       showHistory: false,
       selectedSquare:null,
-      selectedStep:null,
+      
       history: [
         {
           squares: Array(9).fill(null),
@@ -156,14 +161,18 @@ class Game extends React.Component {
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
     
+    
     const moves = history.map((step,move) => {
     const chance= this.state.selectedStep ? "col col-select": "col";
     
+    
       return (
+        
         <li className={chance} key={move}>
-           jugada numero #{move}
+            jugada numero #{move}
           <button onClick={() => this.jumpto(step,move) }>{"ver jugada"}</button>
         </li>
+      
       );
     
     });
@@ -181,7 +190,8 @@ class Game extends React.Component {
             squares={current.squares}
             onClick={(i) => this.handleClick(i)}
             selectedSquare={this.state.selectedSquare}
-            selectedStep={this.state.selectedStep}
+            selectedStep={this.props.selectedStep}
+
             
           />
 
