@@ -12,6 +12,7 @@ class Game extends React.Component {
         {
           squares: Array(9).fill(null),
           positionClicked:null,
+          numMove:null,
         },
       ],
       stepNumber: 0,
@@ -22,7 +23,7 @@ class Game extends React.Component {
       selectedSquare:null,
       stopState:false,
       selectedStep:null,
-      contador:null,
+     
       
       
     };
@@ -32,6 +33,7 @@ class Game extends React.Component {
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
+    // hace una copia de el array square por completo y guarda en squares 
     
     
     if(this.state.showHistory === true){
@@ -62,12 +64,13 @@ class Game extends React.Component {
     } 
     
     
-    
+    // con concat lo que hace es agregar a history nuevas posiciones, ya que une con el anterior 
     this.setState({
       history: history.concat([
         {
           squares: squares,
            positionClicked:i,
+           numMove: history.length -1,
         
         },
       ]),
@@ -87,13 +90,7 @@ class Game extends React.Component {
       });
 
     }
-    if (history.length === 1 && this.state.showHistory === true){
-
-      this.setState({
-        
-        showArrowR:false,
-      });
-    }
+    
   }
   
    
@@ -101,7 +98,7 @@ class Game extends React.Component {
     this.setState({
       selectedSquare:move.positionClicked,
       stepNumber: step,
-      contador: step,
+      
     })
     
   }
@@ -164,11 +161,14 @@ class Game extends React.Component {
     
     const moves = history.map((step,move) => {
     const chance= this.state.selectedStep ? "col col-select": "col";
-    
+      
+     
     
       return (
         
-        <li className={chance} key={move}>
+        <li className={chance} key={move} style={{
+          color: move -1 === current.numMove &&  'magenta'
+        }}>
             jugada numero #{move}
           <button onClick={() => this.jumpto(step,move) }>{"ver jugada"}</button>
         </li>
@@ -176,7 +176,10 @@ class Game extends React.Component {
       );
     
     });
+    
     let status;
+    let jugada= this.state.stepNumber ;
+    
     
     if (winner) {
       status = "EL GANADOR ES: " + winner;
@@ -206,7 +209,7 @@ class Game extends React.Component {
           <p>HISTORIAL</p>
           <div>{status}</div>
           {this.state.showHistory && <ol>{moves}</ol>}
-          <p1 className="f"> El numero de la jugada seleccionada es el {this.state.stepNumber} </p1>
+          <p1 className="f"> El numero de la jugada seleccionada es el {jugada} </p1>
         </div>
         <br></br>
 
