@@ -94,7 +94,7 @@ class Game extends React.Component {
   }
   
    
-  jumpto(move, step) {
+  jumpto(move, step, ) {
     this.setState({
       selectedSquare:move.positionClicked,
       stepNumber: step,
@@ -170,11 +170,11 @@ class Game extends React.Component {
           color: move -1 === current.numMove &&  'magenta'
         }}>
             jugada numero #{move}
-          <button onClick={() => this.jumpto(step,move) }>{"ver jugada"}</button>
+          <button onClick={(e) => this.jumpto(step,move) }>{"ver jugada"}</button>
         </li>
       
       );
-    
+   
     });
     
     let status;
